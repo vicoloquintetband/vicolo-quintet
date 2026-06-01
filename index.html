@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vicolo Quintet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #F5F0E8;
+      --cream-dark: #EDE5D5;
+      --rust: #B85C38;
+      --rust-dark: #8C4025;
+      --rust-light: #D4785A;
+      --brown: #3D2B1F;
+      --brown-mid: #6B4A35;
+      --gold: #C9973A;
+      --gold-light: #E8C47A;
+      --offwhite: #FAF7F2;
+      --text-dark: #2A1A10;
+      --text-mid: #5C3D2A;
+      --text-light: #9C7A65;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--offwhite);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(61, 43, 31, 0.1);
+      transition: padding 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--rust);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--rust);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: var(--brown);
+      overflow: hidden;
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(184, 92, 56, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(201, 151, 58, 0.15) 0%, transparent 55%);
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 39px,
+          rgba(245, 240, 232, 0.04) 39px,
+          rgba(245, 240, 232, 0.04) 40px);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3em;
+    }
+
+    .hero-title em {
+      color: var(--rust-light);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--gold-light);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      padding: 0.85em 2.2em;
+      border: 1.5px solid var(--rust-light);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .hero-cta:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold-light);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--gold-light);
+      margin: 0 auto 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      color: var(--rust);
+      font-style: italic;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── CHI SIAMO ── */
+    #chi-siamo {
+      background: var(--offwhite);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image-placeholder {
+      aspect-ratio: 4/5;
+      background: var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--rust) 0%, var(--brown) 100%);
+      opacity: 0.15;
+    }
+
+    .about-image-label {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--offwhite);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .img-note {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .about-text p {
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(61, 43, 31, 0.12);
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--rust);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* ── BAND MEMBERS ── */
+    #band {
+      background: var(--cream);
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .member-card {
+      text-align: center;
+    }
+
+    .member-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--brown);
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .member-avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, var(--rust-light) 0%, var(--brown) 100%);
+      opacity: 0.4;
+    }
+
+    .member-avatar-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .member-avatar-icon svg {
+      width: 40%;
+      height: 40%;
+      fill: none;
+      stroke: rgba(245, 240, 232, 0.4);
+      stroke-width: 1;
+    }
+
+    .member-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .member-role {
+      font-size: 0.78rem;
+      color: var(--rust);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .member-note {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    /* ── MUSICA ── */
+    #musica {
+      background: var(--offwhite);
+    }
+
+    .music-intro {
+      max-width: 640px;
+      margin-bottom: 3.5rem;
+    }
+
+    .music-intro p {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+    }
+
+    .genres-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .genre-tag {
+      padding: 0.45em 1.2em;
+      border: 1px solid var(--rust-light);
+      color: var(--rust-dark);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(61, 43, 31, 0.12);
+      border: 1px solid rgba(61, 43, 31, 0.12);
+    }
+
+    .artist-item {
+      background: var(--offwhite);
+      padding: 1.5rem;
+    }
+
+    .artist-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .artist-item p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* ── CONCERTI ── */
+    #concerti {
+      background: var(--brown);
+      color: var(--cream);
+    }
+
+    #concerti .section-title {
+      color: var(--cream);
+    }
+
+    #concerti .section-label {
+      color: var(--gold-light);
+    }
+
+    #concerti .divider {
+      background: var(--rust-light);
+    }
+
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+      transition: background 0.2s;
+    }
+
+    .event-item:first-child {
+      border-top: 1px solid rgba(245, 240, 232, 0.1);
+    }
+
+    .event-date {
+      text-align: center;
+    }
+
+    .event-day {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--rust-light);
+      line-height: 1;
+    }
+
+    .event-month {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.7;
+    }
+
+    .event-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .event-info p {
+      font-size: 0.85rem;
+      color: rgba(245, 240, 232, 0.55);
+    }
+
+    .event-start {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 500;
+      text-align: right;
+      min-width: 100px;
+    }
+
+    .no-events {
+      color: rgba(245, 240, 232, 0.45);
+      font-style: italic;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    /* ── GALLERIA ── */
+    #galleria {
+      background: var(--cream-dark);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 8px;
+      margin-top: 3rem;
+    }
+
+    .gallery-item {
+      background: var(--brown);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(184, 92, 56, 0.5) 0%, rgba(61, 43, 31, 0.6) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-item-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--brown-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(245, 240, 232, 0.25);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .gallery-note {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 1rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ── CONTATTI ── */
+    #contatti {
+      background: var(--offwhite);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--rust);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: var(--cream);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-detail strong {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.15rem;
+      font-weight: 500;
+    }
+
+    .contact-detail span {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(61, 43, 31, 0.2);
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--rust);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      padding: 0.9em 2.4em;
+      background: var(--rust);
+      color: var(--cream);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .btn-submit:hover {
+      background: var(--rust-dark);
+    }
+
+    /* ── SOCIAL BAR ── */
+    .social-bar {
+      background: var(--brown);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .social-bar p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(245, 240, 232, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .social-link:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+    }
+
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-dark);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: rgba(245, 240, 232, 0.3);
+    }
+
+    footer strong {
+      color: rgba(245, 240, 232, 0.55);
+      font-weight: 500;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: var(--offwhite);
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 99;
+      }
+
+      .nav-links.open a {
+        font-size: 1.2rem;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .members-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .artists-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 1;
+        height: 220px;
+      }
+
+      .gallery-item:nth-child(4) {
+        grid-column: span 1;
+      }
+
+      .event-item {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .event-start {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 4rem 1.2rem;
+      }
+
+      .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .about-stats {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .artists-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Vicolo Quintet</a>
+    <button class="hamburger" aria-label="Menu" id="menuBtn">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#chi-siamo">Chi siamo</a></li>
+      <li><a href="#band">La Band</a></li>
+      <li><a href="#musica">Musica</a></li>
+      <li><a href="#concerti">Concerti</a></li>
+      <li><a href="#galleria">Galleria</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Musica italiana &nbsp;·&nbsp; Dal vivo</p>
+      <h1 class="hero-title">Vicolo<br><em>Quintet</em></h1>
+      <p class="hero-subtitle">Cinque voci, un'anima sola</p>
+      <a href="#concerti" class="hero-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        Prossimi concerti
+      </a>
+    </div>
+    <div class="hero-scroll">Scorri</div>
+  </section>
+
+  <!-- CHI SIAMO -->
+  <section id="chi-siamo">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="about-image-placeholder">
+            <img src="foto-band.JPEG" alt="Vicolo Quintet" style="width:100%;height:100%;object-fit:cover;">
+            <div
+              style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--brown-mid);">
+              <svg viewBox="0 0 120 120" style="width:60%;height:60%;opacity:0.2;" fill="none" stroke="var(--cream)"
+                stroke-width="1">
+                <circle cx="60" cy="40" r="22" />
+                <path d="M10 110 Q60 75 110 110" />
+              </svg>
+            </div>
+          </div>
+          <p class="img-note">La band prima del live del 27/07/2025 a Sante Marie (AQ).</p>
+        </div>
+        <div class="reveal">
+          <p class="section-label">La nostra storia</p>
+          <h2 class="section-title">Chi <em>siamo</em></h2>
+          <div class="divider"></div>
+          <p>Siamo Vicolo Quintet, un gruppo di cinque amici uniti dalla passione per la grande musica italiana. Tutto nasce
+            dall'idea di portare sui palchi all'aperto le canzoni che hanno segnato generazioni: dai cantautori degli
+            anni '70 fino al pop degli anni 2000.</p>
+          <p>Il nostro repertorio abbraccia le storie, le emozioni e la poesia della canzone d'autore italiana,
+            reinterpretando gli originali con energia e rispetto. Ogni serata è un viaggio nella musica che amiamo.
+          </p>
+          <p>Dal 2025 ci siamo affacciati sui palcoscenici pubblici, portando un centinaio di brani
+            nelle piazze e nelle feste estive del nostro territorio.</p>
+          <div class="about-stats">
+            <div>
+              <div class="stat-num">5</div>
+              <div class="stat-label">Musicisti</div>
+            </div>
+            <div>
+              <div class="stat-num">+100</div>
+              <div class="stat-label">Brani in repertorio</div>
+            </div>
+            <div>
+              <div class="stat-num">2025</div>
+              <div class="stat-label">Prima stagione live</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA BAND -->
+  <section id="band">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Le persone</p>
+        <h2 class="section-title">La <em>Band</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="members-grid">
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <img src="diego.jpeg" alt="Diego" style="width:100%;height:100%;object-fit:cover;">
+            <div class="member-avatar-icon">
+            </div>
+          </div>
+          <div class="member-name">Diego Di Marco</div>
+          <div class="member-role">Chitarre e Voce</div>
+        </div>
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <img src="angelo.jpeg" alt="Angelo" style="width:100%;height:100%;object-fit:cover;">
+            <div class="member-avatar-icon">
+            </div>
+          </div>
+          <div class="member-name">Angelo Carusi</div>
+          <div class="member-role">Chitarre e Voce</div>
+        </div>
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <img src="giovanni.JPEG" alt="Giovanni" style="width:100%;height:100%;object-fit:cover;">
+            <div class="member-avatar-icon">
+            </div>
+          </div>
+          <div class="member-name">Giovanni Cimei</div>
+          <div class="member-role">Batteria e Voce</div>
+        </div>
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <img src="paolo.jpeg" alt="Paolo" style="width:100%;height:100%;object-fit:cover;">
+            <div class="member-avatar-icon">
+            </div>
+          </div>
+          <div class="member-name">Paolo Ranieri</div>
+          <div class="member-role">Tastiere e Voce</div>
+        </div>
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <img src="valerio.jpeg" alt="Valerio" style="width:100%;height:100%;object-fit:cover;">
+            <div class="member-avatar-icon">
+            </div>
+          </div>
+          <div class="member-name">Valerio Montaldi</div>
+          <div class="member-role">Pianoforte e Voce</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSICA -->
+  <section id="musica">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Il nostro repertorio</p>
+        <h2 class="section-title">La nostra <em>musica</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="music-intro reveal">
+        <p>Eseguiamo dal vivo un repertorio che attraversa cinque decenni di musica italiana: dai grandi cantautori
+          degli anni '70 e '80, fino alle hit pop degli anni '90 e 2000. Reinterpretiamo ogni brano rispettando lo
+          spirito dell'originale, ma con l'energia di una band affiatata.</p>
+      </div>
+      <div class="genres-row reveal">
+        <span class="genre-tag">Cantautorato italiano</span>
+        <span class="genre-tag">Pop anni '80</span>
+        <span class="genre-tag">Rock italiano anni '90</span>
+        <span class="genre-tag">Anni 2000</span>
+        <span class="genre-tag">Live</span>
+      </div>
+      <div class="reveal">
+        <p class="section-label" style="margin-bottom:1.2rem;">Alcuni artisti che interpretiamo</p>
+        <div class="artists-grid">
+          <div class="artist-item">
+            <h4>Lucio Battisti</h4>
+            <p>Cantautorato e melodia italiana</p>
+          </div>
+          <div class="artist-item">
+            <h4>Fabrizio De André</h4>
+            <p>Poesia e impegno civile</p>
+          </div>
+          <div class="artist-item">
+            <h4>Cesare Cremonini</h4>
+            <p>Le parole dell'amore</p>
+          </div>
+          <div class="artist-item">
+            <h4>Vasco Rossi</h4>
+            <p>Rock e vita vissuta</p>
+          </div>
+          <div class="artist-item">
+            <h4>Rino Gaetano</h4>
+            <p>Il genio nel caos</p>
+          </div>
+          <div class="artist-item">
+            <h4>Pino Daniele</h4>
+            <p>Blues e soul dell'anima</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCERTI -->
+  <section id="concerti">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Date e luoghi</p>
+        <h2 class="section-title">Prossimi <em>concerti</em></h2>
+        <div class="divider" style="background: var(--rust-light);"></div>
+      </div>
+      <div class="events-list reveal">
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">10</div>
+            <div class="event-month">GIUGNO</div>
+          </div>
+          <div class="event-info">
+            <h3>AVEZZANO</h3>
+            <p>IL SUGHINO</p>
+          </div>
+          <div class="event-start">H. 21:15</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">01</div>
+            <div class="event-month">AGOSTO</div>
+          </div>
+          <div class="event-info">
+            <h3>CAPISTRELLO</h3>
+            <p>BAR LA ROTONDA</p>
+          </div>
+          <div class="event-start">H. 21:15</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">18</div>
+            <div class="event-month">AGOSTO</div>
+          </div>
+          <div class="event-info">
+            <h3>CAPISTRELLO</h3>
+            <p>PIAZZA RISORGIMENTO</p>
+          </div>
+          <div class="event-start">H. 21:15</div>
+        </div>
+
+      </div>
+      <p class="no-events reveal">Nuove date in arrivo — seguici sui social per rimanere aggiornato.</p>
+    </div>
+  </section>
+
+  <!-- GALLERIA -->
+  <section id="galleria">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Fotografie</p>
+        <h2 class="section-title">La nostra <em>galleria</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item" style="height:488px;">
+          <img src="gallery4.jpg" alt="gallery4" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="gallery-item">
+          <img src="gallery3.JPEG" alt="gallery3" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="gallery-item">
+          <img src="gallery1.JPEG" alt="gallery1" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="gallery-item">
+          <img src="gallery5.jpg" alt="gallery5" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="section-label">Scrivici</p>
+          <h2 class="section-title">Vuoi <em>ingaggiarci</em>?</h2>
+          <div class="divider"></div>
+          <p>Siamo disponibili per feste, sagre, eventi comunali e serate private. Scrivici per ricevere
+            informazioni sul nostro repertorio, disponibilità e preventivo.<br><br></p>
+          <ul class="contact-list">
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div class="contact-detail">
+                <strong>Email</strong>
+                <span>vicoloquintetband@gmail.com</span>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.2 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>
+              </div>
+              <div class="contact-detail">
+                <strong>Telefono</strong>
+                <span>[ +39 351 794 5597 ]</span>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div class="contact-detail">
+                <strong>Zona</strong>
+                <span>[ Abruzzo / L'Aquila ]</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <form action="https://formspree.io/f/xjgzngwv" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="nome" placeholder="Mario Rossi" required />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="mario@esempio.it" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tipo di evento</label>
+              <select name="tipo_evento" required>
+                <option value="" disabled selected>Seleziona...</option>
+                <option>Festa estiva / Sagra</option>
+                <option>Evento comunale</option>
+                <option>Festa privata</option>
+                <option>Altro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Data indicativa</label>
+              <input type="date" name="data" />
+            </div>
+            <div class="form-group">
+              <label>Messaggio</label>
+              <textarea name="messaggio" placeholder="Raccontaci del tuo evento..."></textarea>
+            </div>
+            <button class="btn-submit" type="submit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              Invia richiesta
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL BAR -->
+  <div class="social-bar">
+    <p>Seguici sui social</p>
+    <div class="social-links">
+      <!-- Instagram -->
+      <a href="[https://www.instagram.com/vicolo_quintet_band_]"
+        target="_blank" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="[https://www.facebook.com/share/1SG7YoihrG/?mibextid=wwXIfr]" target="_blank" class="social-link"
+        aria-label="Facebook">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+        </svg>
+      </a>
+      <!-- YouTube -->
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="year"></span> <strong>Vicolo Quintet</strong> &nbsp;·&nbsp; Tutti i diritti riservati</p>
+  </footer>
+
+  <script>
+    // Anno dinamico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav hamburger
+    const btn = document.getElementById('menuBtn');
+    const links = document.getElementById('navLinks');
+    btn.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav shrink on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.padding =
+        window.scrollY > 60 ? '0.7rem 3rem' : '1.2rem 3rem';
+    });
+  </script>
+</body>
+
+</html>
